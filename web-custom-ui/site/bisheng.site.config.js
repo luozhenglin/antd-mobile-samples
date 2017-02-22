@@ -1,3 +1,4 @@
+const path = require('path');
 const commonConfig = require('./bisheng.common.config');
 
 function pickerGenerator(module) {
@@ -16,32 +17,18 @@ function pickerGenerator(module) {
 
 module.exports = Object.assign({}, commonConfig, {
   port: 8001,
-  source: [
-    './components',
-    './docs',
-    'CHANGELOG.md', // TODO: fix it in bisheng
-  ],
-  theme: './site/theme',
-  htmlTemplate: './site/theme/static/template.html',
-  pick: {
-    components: commonConfig.pick.components,
-    /* eslint-disable consistent-return */
-    changelog(markdownData) {
-      if (markdownData.meta.filename === 'CHANGELOG.md') {
-        return {
-          meta: markdownData.meta,
-        };
-      }
-    },
-    /* eslint-enable consistent-return */
-    'docs/react': pickerGenerator('react'),
+  source: {
+    components: './components',
+    docs: './docs',
+    CHANGELOG: 'CHANGELOG.md',
   },
-  plugins: [
-    'bisheng-plugin-description',
-    'bisheng-plugin-toc?maxDepth=2',
-    'bisheng-plugin-antd',
-  ],
+  theme: './site/desktop/src',
+  htmlTemplate: path.join(__dirname, './desktop/src/static/template.html'),
   doraConfig: {
     verbose: true,
+  },
+  webpackConfig(config) {
+    config = commonConfig.webpackConfig(config);
+    return config;
   },
 });

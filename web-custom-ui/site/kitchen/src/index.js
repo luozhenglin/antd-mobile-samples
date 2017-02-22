@@ -1,21 +1,19 @@
 const path = require('path');
 
-const indexDemos = ['drawer', 'list-view']; // 这些组件每个 demo 都需要全屏展示，首页直接放其各个 demo 链接
+const indexDemos = ['drawer', 'list-view'];
 const pluginAntdConfig = {
   babelConfig: {
     plugins: [
       [
-        require.resolve('babel-plugin-import'),
-        [{
-          style: true,
-          libraryName: 'antd_custom_ui',
-          libraryDirectory: 'components',
-        },
-        {
+        require.resolve('babel-plugin-import'), [{
           style: true,
           libraryName: 'antd-mobile',
-          libraryDirectory: 'lib',
-        }],
+          libraryDirectory: 'components',
+        },{
+        style: true,
+        libraryName: 'antd_custom_ui',
+        libraryDirectory: 'components',
+      },],
       ],
     ],
   },
@@ -55,21 +53,11 @@ module.exports = {
     `bisheng-plugin-antd?${JSON.stringify(pluginAntdConfig)}`,
     'bisheng-plugin-react?lang=__react',
   ],
-
-  hashSpliter: '-demo-', // URL 中记录到 hash 里的特殊标记
-  cateChinese: {
-    Navigation: '导航',
-    'Basic Components': '基础组件',
-    Form: '表单',
-    'Operation Feedback': '操作反馈',
-    Others: '其他',
-  },
   routes: [{
     path: '/',
     component: './template/KitchenSink/index',
   }, {
-    path: '/:component/',
-    dataPath: '/components/:component',
+    path: '/components/:component',
     component: './template/KitchenSink/Demo',
   }],
 };

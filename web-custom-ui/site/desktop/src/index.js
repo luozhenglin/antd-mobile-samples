@@ -45,10 +45,11 @@ module.exports = {
   categoryOrder: {
     Layout: 0,
     Navigation: 1,
-    'Basic Components': 2,
-    Form: 3,
-    'Operation Feedback': 4,
-    Others: 5,
+    'Data Entry': 2,
+    'Data Display': 3,
+    Feedback: 4,
+    Combination: 6,
+    Gesture: 5,
   },
   typeOrder: {
     Layout: 0,
@@ -62,6 +63,7 @@ module.exports = {
   docVersions: {
     '0.7.x': 'http://07x.mobile.ant.design/',
     '0.8.x': 'http://08x.mobile.ant.design/',
+    '0.9.x': 'http://09x.mobile.ant.design/',
   },
   enLocale,
   zhLocale,
@@ -113,6 +115,7 @@ module.exports = {
       component: contentTmpl,
     }, {
       path: '/changelog',
+      dataPath: 'CHANGELOG',
       component: contentTmpl,
     }, {
       path: '/components/:children',
